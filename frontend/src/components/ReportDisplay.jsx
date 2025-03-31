@@ -1,22 +1,18 @@
+import { useRef, useState } from "react";
 import "../App.css";
 
+// added these to explicitly open the report using backend port
 const BACKEND_URL = "http://localhost:3000";
 
 function ReportDisplay({ report }) {
-  console.log("---report-----", report.jsonPath);
+  const [reportUrl, setReportUrl] = useState(null);
+  const iframeRef = useRef(null);
 
-  const getFileName = (filePath) => filePath.split("/").pop(); // Extract filename
-
-  const handleDownload = (filePath) => {
-    const fileName = getFileName(filePath);
+  function loadReport(filePath) {
+    const fileName = filePath.split("/").pop();
     const fileUrl = `${BACKEND_URL}/reports/${fileName}`;
-    const link = document.createElement("a");
-    link.href = fileUrl;
-    link.download = fileName;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
+    setReportUrl(fileUrl);
+  }
 
   return (
     <div className="report">
@@ -25,15 +21,11 @@ function ReportDisplay({ report }) {
       <p>Accessibility: {report.scores.accessibility * 100}%</p>
       <p>SEO: {report.scores.seo * 100}%</p>
       <p>Best Practices: {report.scores.bestPractices * 100}%</p>
-      <h3>AI Suggestions</h3>
-      <p>{report.summary}</p>
-      <div>
-        <button onClick={() => handleDownload(report.jsonPath)}>Download JSON Report</button>
 
-        <a href={`/reports/${getFileName(report.htmlPath)}`} target="_blank" rel="noopener noreferrer">
-          <button>Open Report</button>
-        </a>
-      </div>
+      <button onClick={() => loadReport(report.htmlPath)}>Load Report Below</button>
+
+      {/* Display the loaded report */}
+      {reportUrl && <iframe ref={iframeRef} src={reportUrl} title="Lighthouse Report" width="100%" height="600px" style={{ border: "1px solid #ccc", marginTop: "20px" }} />}
     </div>
   );
 }
