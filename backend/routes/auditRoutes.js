@@ -3,18 +3,13 @@ const { runAudit } = require("../utils/lighthouseHelper");
 const Report = require("../models/Report");
 const router = express.Router();
 
-router.get("/", async (req, res) => {
-  return res.sendStatus(200); // Equivalent to res.status(200).send()
-});
 
 router.post("/generate", async (req, res) => {
-  console.log(req.body);
   const { url } = req.body;
   if (!url) return res.status(400).json({ error: "URL is required" });
 
   try {
     const { lhr, jsonPath, htmlPath } = await runAudit(url);
-    console.log("Here");
 
     const reportData = {
       url,
