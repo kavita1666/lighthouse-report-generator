@@ -32,25 +32,23 @@ Ensure you have Node.js (v16+) installed.
    git clone https://github.com/yourusername/lighthouse-report-generator.git
    cd lighthouse-report-generator
    ```
+2. Project structure has backend and frontend separated out, so we would require to install dependencies on each separately. Follow the steps below to setup the project.
 
-2. Install dependencies:
+3. Setup and Start the backend server:
    ```sh
+   cd backend
    npm install
+   node server.js
    ```
 
-3. Start the server:
-   ```sh
-   npm start
-   ```
-
-4. (Optional) Start the frontend if implemented:
+4. Setup and Start the frontend:
    ```sh
    cd frontend
    npm install
-   npm start
+   npm run dev
    ```
 
-The frontend runs on `http://localhost:3000` and the backend on `http://localhost:3000/api`.
+The frontend runs on `http://localhost:5000` and the backend on `http://localhost:3000/api/audit/generate`.
 
 ## 📄 Usage
 1. Enter a website URL in the frontend UI.
