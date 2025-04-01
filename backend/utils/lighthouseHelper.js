@@ -3,6 +3,7 @@ import puppeteer from "puppeteer";
 import fs from "fs-extra";
 import path from "path";
 import { fileURLToPath } from "url";
+import { getSuggestions } from "./aiHelper.js";
 
 // Fix __dirname in ESM
 const __filename = fileURLToPath(import.meta.url);
@@ -26,11 +27,12 @@ async function runAudit(url) {
   const timestamp = Date.now();
   const jsonPath = path.join(reportDir, `${timestamp}.json`);
   const htmlPath = path.join(reportDir, `${timestamp}.html`);
+  const suggestions = await getSuggestions(lhr);
 
   await fs.writeFile(jsonPath, JSON.stringify(lhr, null, 2));
   await fs.writeFile(htmlPath, report); // Fix here: use `report` directly
 
-  return { lhr, jsonPath, htmlPath };
+  return { lhr, jsonPath, htmlPath, suggestions };
 }
 
 export { runAudit };

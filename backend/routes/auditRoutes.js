@@ -1,6 +1,7 @@
 const express = require("express");
 const { runAudit } = require("../utils/lighthouseHelper");
 const Report = require("../models/Report");
+const { generateAIReport } = require("../utils/aiHelper");
 const router = express.Router();
 
 
@@ -9,7 +10,9 @@ router.post("/generate", async (req, res) => {
   if (!url) return res.status(400).json({ error: "URL is required" });
 
   try {
-    const { lhr, jsonPath, htmlPath } = await runAudit(url);
+    const { lhr, jsonPath, htmlPath, suggestions } = await runAudit(url);
+
+    const aiReport = await generateAIReport(lhr, suggestions);
 
     const reportData = {
       url,
@@ -19,7 +22,8 @@ router.post("/generate", async (req, res) => {
         seo: lhr.categories.seo.score,
         bestPractices: lhr.categories["best-practices"].score,
       },
-      summary: "AI-generated summary here...",
+      summary: aiReport.summary, // AI-generated summary
+      recommendations: aiReport.recommendations, // Fixing plan
       jsonPath,
       htmlPath,
     };
