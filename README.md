@@ -56,6 +56,11 @@ The frontend runs on `http://localhost:5000` and the backend on `http://localhos
 3. View the generated report summary.
 4. Download the full report in JSON or HTML format.
 
+## Screenshots of UI
+![Screenshot 1](frontend/src/assets/Screenshot1.png)
+![Screenshot 2](frontend/src/assets/Screenshot2.png)
+![Screenshot 3](frontend/src/assets/Screenshot3.png)
+
 ## 📌 Repository
 [GitHub Repository](https://github.com/yourusername/lighthouse-report-generator)
 
