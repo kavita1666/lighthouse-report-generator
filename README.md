@@ -14,7 +14,7 @@ The backend is implemented using Node.js with express and provides an API endpoi
 - Runs a Lighthouse audit for the given URL
 - Returns a summary of the report (Performance, Accessibility, SEO, Best Practices)
 - Saves the full report as JSON and HTML
-- Stores reports in /reports folder
+- Stores reports in /backend/reports folder
 - Handles error cases such as invalid URLs and server failures
 
 ### Frontend (React.js)

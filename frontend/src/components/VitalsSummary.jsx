@@ -6,9 +6,9 @@ export const VitalsSummary = ({ metrics }) => {
   const { lcp, cls, fcp, ttfb, inp } = metrics;
 
   return (
-    <div className="vitals-container">
-      <div className="vitals-header">
-        <h2>
+    <div className="modal-container">
+      <div >
+        <h2 className="heading">
           Core Web Vitals Assessment: <span className="status-pass">Passed</span>
         </h2>
         <p className="subtext">Latest 28-day collection</p>

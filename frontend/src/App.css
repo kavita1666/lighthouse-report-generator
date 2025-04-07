@@ -81,13 +81,13 @@ a {
 }
 
 /** metrics **/
-.vitals-container {
+.modal-container {
   max-width: 1000px;
-  margin: 0 auto;
   background: white;
   border-radius: 12px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
-  padding: 32px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  padding: 10px 22px;
+  margin-bottom: 15px;
 }
 
 .vitals-header h2 {
@@ -153,3 +153,42 @@ a {
   transition: width 0.4s ease;
 }
 
+/** LLM report css **/
+.llm-report {
+  background-color: #ffffff;
+  border: 1px solid #cccccc;
+  border-radius: 6px;
+  padding: 20px;
+  margin: 30px auto;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+  font-family: Arial, sans-serif;
+}
+
+.heading {
+  font-size: 20px;
+  font-weight: bold;
+  color: #222222;
+  margin-bottom: 15px;
+}
+
+.llm-issues-list {
+  list-style-type: disc;
+  padding-left: 25px;
+  margin: 0;
+}
+
+.llm-issues-list li {
+  margin-bottom: 12px;
+  color: #333333;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.llm-issues-list a {
+  color: #007acc;
+  text-decoration: underline;
+}
+
+.llm-issues-list a:hover {
+  color: #005fa3;
+}

@@ -1,5 +1,6 @@
 const express = require("express");
 const { runAudit } = require("../utils/lighthouseHelper");
+const { summarizeReportUsingLLM } = require("../utils/aiSummaryGenerator");
 const Report = require("../models/Report");
 const router = express.Router();
 
@@ -8,7 +9,7 @@ router.post("/generate", async (req, res) => {
   if (!url) return res.status(400).json({ error: "Add a valid url" });
 
   try {
-    const { lhr, jsonPath, htmlPath } = await runAudit(url); //service called
+    const { lhr, jsonPath, htmlPath } = await runAudit(url);
 
     const scores = {
       performance: lhr?.categories?.performance?.score,
@@ -23,12 +24,15 @@ router.post("/generate", async (req, res) => {
     if (!lhr || hasNullScores) {
       return res.status(500).json({ error: "Audit failed or incomplete. Please check the URL and try again." });
     }
-
+    const suggestions = await summarizeReportUsingLLM(lhr);
+    if (!suggestions) {
+      return res.status(500).json({ error: "Failed to generate suggestions." });
+    }
     const reportData = {
       url,
       scores,
       lhr,
-      summary: "AI-generated summary here...",
+      summary: suggestions[0].generated_text,
       jsonPath,
       htmlPath,
     };
