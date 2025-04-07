@@ -11,7 +11,6 @@ const __dirname = path.dirname(__filename);
 async function runAudit(url) {
   const browser = await puppeteer.launch({ headless: true });
   const port = new URL(browser.wsEndpoint()).port;
-  console.log('-----browser', browser, port);
 
   const result = await lighthouse(url, {
     port,
@@ -29,7 +28,7 @@ async function runAudit(url) {
   const htmlPath = path.join(reportDir, `${timestamp}.html`);
 
   await fs.writeFile(jsonPath, JSON.stringify(lhr, null, 2));
-  await fs.writeFile(htmlPath, report); // Fix here: use `report` directly
+  await fs.writeFile(htmlPath, report);
 
   return { lhr, jsonPath, htmlPath };
 }

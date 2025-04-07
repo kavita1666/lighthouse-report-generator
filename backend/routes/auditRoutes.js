@@ -18,6 +18,7 @@ router.post("/generate", async (req, res) => {
         seo: lhr.categories.seo.score,
         bestPractices: lhr.categories["best-practices"].score,
       },
+      lhr,
       summary: "AI-generated summary here...",
       jsonPath,
       htmlPath,
