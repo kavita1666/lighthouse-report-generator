@@ -3,7 +3,7 @@ import "../App.css";
 import { Metric } from "./Metrics";
 
 export const VitalsSummary = ({ metrics }) => {
-  const { lcp, cls, fcp, ttfb } = metrics;
+  const { lcp, cls, fcp, ttfb, inp } = metrics;
 
   return (
     <div className="vitals-container">
@@ -18,6 +18,7 @@ export const VitalsSummary = ({ metrics }) => {
         <Metric label="Cumulative Layout Shift (CLS)" value={parseFloat(cls)} unit="" threshold={0.1} good={(v) => v <= 0.1} />
         <Metric label="First Contentful Paint (FCP)" value={parseFloat(fcp)} unit="s" threshold={1.8} good={(v) => v <= 1.8} />
         <Metric label="Time to First Byte (TTFB)" value={parseFloat(ttfb)} unit="s" threshold={0.8} good={(v) => v <= 0.8} />
+        <Metric label="Interaction to Next Paint (INP)" value={parseFloat(inp)} unit="ms" threshold={200} good={(v) => v <= 200} />
       </div>
     </div>
   );

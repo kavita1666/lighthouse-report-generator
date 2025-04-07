@@ -16,10 +16,11 @@ function ReportDisplay({ report }) {
   }
 
   const metricsSummary = {
-    lcp: (report.lhr.audits["largest-contentful-paint"].numericValue / 1000).toFixed(1), // in seconds
-    cls: report.lhr.audits["cumulative-layout-shift"].numericValue.toFixed(2),
-    fcp: (report.lhr.audits["first-contentful-paint"].numericValue / 1000).toFixed(1), // in seconds
-    ttfb: (report.lhr.audits["server-response-time"].numericValue / 1000).toFixed(1), // in seconds
+    lcp: (report.lhr.audits["largest-contentful-paint"]?.numericValue / 1000).toFixed(1), // in seconds
+    cls: report.lhr.audits["cumulative-layout-shift"]?.numericValue.toFixed(2),
+    fcp: (report.lhr.audits["first-contentful-paint"]?.numericValue / 1000).toFixed(1), // in seconds
+    ttfb: (report.lhr.audits["server-response-time"]?.numericValue / 1000).toFixed(1), // in seconds
+    inp: report.lhr.audits["interactive"]?.numericValue ? report.lhr.audits["interactive"].numericValue.toFixed(0) : "N/A", // in milliseconds
   };
 
   return (

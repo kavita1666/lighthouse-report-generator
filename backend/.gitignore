@@ -7,10 +7,15 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Node and build artifacts
 node_modules
 dist
 dist-ssr
 *.local
+
+# Lighthouse reports - ignore contents but keep folder
+reports/*
+!reports/.gitkeep
 
 # Editor directories and files
 .vscode/*

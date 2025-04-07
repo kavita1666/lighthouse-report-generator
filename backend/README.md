@@ -12,3 +12,6 @@ openai → Interacts with OpenAI API
 
 fs → Handles file operations
 
+Puppeteer (or Chrome)
+
+Purpose: Analyze website performance by generating automated Lighthouse reports (HTML & JSON).
