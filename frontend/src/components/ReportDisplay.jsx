@@ -83,11 +83,11 @@ function ReportDisplay({ report }) {
         </ul>
       </div>
 
-      {/* Display the loaded report */}
-      {reportUrl && <iframe ref={iframeRef} src={reportUrl} title="Lighthouse Report" width="100%" height="600px" style={{ border: "1px solid #ccc", marginTop: "20px" }} />}
-
       {/* Button to display report in iframe */}
       <button onClick={() => loadReport(report.htmlPath)}>Load Report Below</button>
+      
+      {/* Display the loaded report */}
+      {reportUrl && <iframe ref={iframeRef} src={reportUrl} title="Lighthouse Report" width="100%" height="600px" style={{ border: "1px solid #ccc", marginTop: "20px" }} />}
     </div>
   );
 }
