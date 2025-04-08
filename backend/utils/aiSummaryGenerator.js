@@ -18,7 +18,7 @@ const sendToLLM = async (prompt) => {
 };
 
 const preparePrompt = (insights) => {
-  return `
+    return `
   I have run a Lighthouse audit on my website. Here are the results:
   
   Performance Score: ${insights.performanceScore}
@@ -37,33 +37,34 @@ const preparePrompt = (insights) => {
   Based on the above, what improvements would you recommend to boost performance, SEO, and user experience?
   Keep it practical and technical where possible.
   `;
-};
-
-const extractInsights = (lhr) => {
-  const { categories, audits } = lhr;
-
-  return {
-    performanceScore: categories.performance.score,
-    accessibilityScore: categories.accessibility.score,
-    seoScore: categories.seo.score,
-    bestPracticesScore: categories["best-practices"].score,
-
-    issues: {
-      renderBlockingResources: audits["render-blocking-resources"]?.description,
-      unusedCSS: audits["unused-css-rules"]?.description,
-      unusedJS: audits["unused-javascript"]?.description,
-      largestContentfulPaint: audits["largest-contentful-paint"]?.displayValue,
-      cumulativeLayoutShift: audits["cumulative-layout-shift"]?.displayValue,
-      imageSize: audits["uses-optimized-images"]?.description,
-    },
   };
-};
+  
+  const extractInsights = (lhr) => {
+    const { categories, audits } = lhr;
+  
+    return {
+      performanceScore: categories.performance.score,
+      accessibilityScore: categories.accessibility.score,
+      seoScore: categories.seo.score,
+      bestPracticesScore: categories['best-practices'].score,
+  
+      issues: {
+        renderBlockingResources: audits['render-blocking-resources']?.description,
+        unusedCSS: audits['unused-css-rules']?.description,
+        unusedJS: audits['unused-javascript']?.description,
+        largestContentfulPaint: audits['largest-contentful-paint']?.displayValue,
+        cumulativeLayoutShift: audits['cumulative-layout-shift']?.displayValue,
+        imageSize: audits['uses-optimized-images']?.description,
+      }
+    };
+  };
 
-async function summarizeReportUsingLLM(lhr) {
-  const insights = extractInsights(lhr);
-  const prompt = preparePrompt(insights);
-  const suggestions = await sendToLLM(prompt);
-  return suggestions;
+async function  summarizeReportUsingLLM(lhr) {
+    const insights = extractInsights(lhr);
+    const prompt = preparePrompt(insights);
+    const suggestions = await sendToLLM(prompt);
+    return suggestions;
 }
-// Export the function for use in other modules
-export { summarizeReportUsingLLM };
+// Export the function for use in other modules 
+export {summarizeReportUsingLLM};
+  
